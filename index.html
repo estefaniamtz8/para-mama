@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para ti, Mamá ❤️ ✨</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --card-bg: #ffffff;
+            --primary: #e86f8c;
+            --primary-dark: #c94c6a;
+            --text-main: #4a4a4a;
+            --accent: #f9d5e5;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(160deg, #ffecd2 0%, #fcb69f 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+            color: var(--text-main);
+        }
+
+        /* Pantalla inicial (Sobre) */
+        .envelope-wrapper {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.92);
+            padding: 40px 25px;
+            border-radius: 24px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            max-width: 380px;
+            width: 100%;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+        }
+
+        .envelope-icon {
+            font-size: 70px;
+            display: inline-block;
+            animation: float 2.5s ease-in-out infinite;
+            cursor: pointer;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        h1.title-intro {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.3rem;
+            color: var(--primary-dark);
+            margin: 15px 0 10px;
+        }
+
+        .subtitle-intro {
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .btn-open {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(232, 111, 140, 0.4);
+            transition: all 0.3s ease;
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        .btn-open:active {
+            transform: scale(0.95);
+        }
+
+        /* Tarjeta principal */
+        .card-container {
+            display: none;
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 26px 20px;
+            max-width: 420px;
+            width: 100%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+            animation: fadeInUp 0.8s ease forwards;
+            position: relative;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--primary-dark);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 5px 12px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+        }
+
+        .card-header h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.1rem;
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+        }
+
+        /* Carrusel Polaroid */
+        .polaroid-frame {
+            background: #fff;
+            padding: 10px 10px 16px 10px;
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            border: 1px solid #f2e6e9;
+            margin-bottom: 20px;
+            position: relative;
+            text-align: center;
+        }
+
+        .photo-wrapper {
+            position: relative;
+            width: 100%;
+            height: 240px;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #fdf2f4;
+        }
+
+        .photo-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.35s ease;
+        }
+
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.85);
+            color: var(--primary-dark);
+            border: none;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-btn:active {
+            transform: translateY(-50%) scale(0.9);
+        }
+
+        .prev-btn { left: 8px; }
+        .next-btn { right: 8px; }
+
+        .photo-caption {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.35rem;
+            color: var(--primary-dark);
+            margin-top: 10px;
+        }
+
+        .dots-container {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 8px;
+        }
+
+        .dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #e0c3ca;
+            transition: all 0.3s;
+        }
+
+        .dot.active {
+            background: var(--primary);
+            width: 18px;
+            border-radius: 4px;
+        }
+
+        /* Cuerpo de la carta */
+        .letter-body {
+            font-size: 0.98rem;
+            line-height: 1.65;
+            min-height: 150px;
+            margin-bottom: 18px;
+            white-space: pre-line;
+        }
+
+        /* Sección interactiva de abrazos */
+        .hug-section {
+            background: #fff5f7;
+            border-radius: 16px;
+            padding: 16px;
+            text-align: center;
+            margin-top: 10px;
+            border: 1px dashed var(--primary);
+        }
+
+        .hug-counter {
+            font-size: 0.88rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--primary-dark);
+        }
+
+        .btn-hug {
+            background: white;
+            color: var(--primary-dark);
+            border: 2px solid var(--primary);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.92rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        .btn-hug:active {
+            background: var(--primary);
+            color: white;
+            transform: scale(0.95);
+        }
+
+        .footer-sign {
+            text-align: right;
+            margin-top: 18px;
+            font-size: 0.88rem;
+            color: #777;
+        }
+
+        .footer-sign strong {
+            color: var(--primary-dark);
+            display: block;
+            font-size: 1.02rem;
+        }
+
+        /* Corazones flotantes */
+        .floating-heart {
+            position: fixed;
+            bottom: -20px;
+            font-size: 24px;
+            animation: flyUp 3s linear forwards;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        @keyframes flyUp {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Pantalla 1: El sobre -->
+    <div class="envelope-wrapper" id="introScreen">
+        <div class="envelope-icon" onclick="openCard()">💌</div>
+        <h1 class="title-intro">Tienes un mensaje</h1>
+        <p class="subtitle-intro">Hecho con código y mucho cariño hasta Catemaco ✨</p>
+        <button class="btn-open" onclick="openCard()">Abrir sorpresa</button>
+    </div>
+
+    <!-- Pantalla 2: La carta + Fotos -->
+    <div class="card-container" id="mainCard">
+        <span class="badge">De Tehuacán a Catemaco 📍</span>
+        <div class="card-header">
+            <h2>Para la mejor mamá ❤️</h2>
+        </div>
+
+        <!-- Galería Polaroid -->
+        <div class="polaroid-frame" id="polaroidBox">
+            <div class="photo-wrapper">
+                <img id="carouselImg" src="" alt="Recuerdo juntas">
+                <button class="nav-btn prev-btn" onclick="changePhoto(-1)">‹</button>
+                <button class="nav-btn next-btn" onclick="changePhoto(1)">›</button>
+            </div>
+            <p class="photo-caption" id="photoCaption"></p>
+            <div class="dots-container" id="dotsContainer"></div>
+        </div>
+
+        <div class="letter-body" id="typewriterText"></div>
+
+        <div class="hug-section">
+            <p class="hug-counter" id="hugText">Abrazos enviados a distancia: 0</p>
+            <button class="btn-hug" onclick="sendHug()">Pedir un abrazo 🤗</button>
+        </div>
+
+        <div class="footer-sign">
+            Programado con amor por tu hija,
+            <strong>Fany (la Inge 👩‍💻)</strong>
+        </div>
+    </div>
+
+    <script>
+        // EDITABLE 1: Agrega aquí las rutas de tus fotos y sus frases
+        // Pon las imágenes en la misma carpeta que este index.html (ej. "foto1.jpg")
+        const photos = [
+            {
+                src: "foto1.jpg",
+                caption: "Siempre juntas, aunque estemos lejos ✨"
+            },
+            {
+                src: "foto2.jpg",
+                caption: "Mi mejor ejemplo y mi apoyo siempre ✨"
+            },
+            {
+                src: "foto3.jpg",
+                caption: "La mejor maestraa ✨"
+            },
+            {
+                src: "foto4.jpg",
+                caption: "¡Gracias por todo, mami! ✨"
+            },
+            {
+                src: "foto5.jpg",
+                caption: "jijiji teamo aunque nos peleemos ✨"
+            },
+            {
+                src: "foto6.jpg",
+                caption: "Love u✨"
+            }
+            
+        ];
+
+        // EDITABLE 2: Mensaje de la carta
+        const message = `Hola mami,\n\nAunque estemos lejos, siempre te traigo presente en todo lo que hago. Quise hacerte esta pequeña página para demostrarte que todo el esfuerzo valió la pena jajajajaja y para mandarte un pedacito de mí hasta allá. Ya pronto nos veremos de nuevo. Muchos besitos 🥰\nGracias por apoyarme siempre, por tus consejos y por ser mi mayor ejemplo. ¡Te extraño y te quiero muchísimo!`;
+
+        let currentPhoto = 0;
+        let index = 0;
+        let hugs = 0;
+
+        // Inicializar galería y soporte táctil (swipe)
+        function initGallery() {
+            const dotsContainer = document.getElementById('dotsContainer');
+            dotsContainer.innerHTML = '';
+            photos.forEach((_, i) => {
+                const dot = document.createElement('span');
+                dot.classList.add('dot');
+                if (i === 0) dot.classList.add('active');
+                dotsContainer.appendChild(dot);
+            });
+            updatePhotoDisplay();
+
+            // Detectar deslizamiento con el dedo en celular
+            let touchStartX = 0;
+            const box = document.getElementById('polaroidBox');
+            box.addEventListener('touchstart', e => touchStartX = e.changedTouches[0].screenX, {passive: true});
+            box.addEventListener('touchend', e => {
+                const touchEndX = e.changedTouches[0].screenX;
+                if (touchStartX - touchEndX > 40) changePhoto(1);
+                if (touchEndX - touchStartX > 40) changePhoto(-1);
+            }, {passive: true});
+        }
+
+        function updatePhotoDisplay() {
+            const img = document.getElementById('carouselImg');
+            const caption = document.getElementById('photoCaption');
+            const dots = document.querySelectorAll('.dot');
+
+            img.style.opacity = 0;
+            setTimeout(() => {
+                img.src = photos[currentPhoto].src;
+                caption.innerText = photos[currentPhoto].caption;
+                img.style.opacity = 1;
+            }, 180);
+
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentPhoto);
+            });
+        }
+
+        function changePhoto(step) {
+            currentPhoto = (currentPhoto + step + photos.length) % photos.length;
+            updatePhotoDisplay();
+        }
+
+        function openCard() {
+            document.getElementById('introScreen').style.display = 'none';
+            document.getElementById('mainCard').style.display = 'block';
+            initGallery();
+            launchHearts(12);
+            typeWriter();
+        }
+
+        function typeWriter() {
+            if (index < message.length) {
+                document.getElementById('typewriterText').innerHTML += message.charAt(index);
+                index++;
+                setTimeout(typeWriter, 35);
+            }
+        }
+
+        function sendHug() {
+            hugs++;
+            const messages = [
+                "¡Abrazote recibido hasta Catemaco! 💕",
+                "¡Otro abrazo apretado! 🥰",
+                "¡Ya llevas " + hugs + " abrazos acumulados! ✨",
+                "¡Te mando un beso enorme, ma! 😘"
+            ];
+            const randomMsg = hugs <= 2 ? messages[hugs - 1] : messages[Math.floor(Math.random() * messages.length)];
+            document.getElementById('hugText').innerText = `${randomMsg} (${hugs})`;
+            launchHearts(6);
+        }
+
+        function launchHearts(count) {
+            const emojis = ['❤️', '💖', '🌸', '✨', '🤗'];
+            for (let i = 0; i < count; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.classList.add('floating-heart');
+                    heart.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+                    heart.style.left = Math.random() * 90 + 5 + 'vw';
+                    heart.style.animationDuration = (Math.random() * 1.5 + 2) + 's';
+                    document.body.appendChild(heart);
+
+                    setTimeout(() => heart.remove(), 3500);
+                }, i * 150);
+            }
+        }
+    </script>
+</body>
+</html>
